@@ -1,4 +1,5 @@
 import CategoryItem from "../category-item/category-item.component";
+import './categories-container.styles.scss';
 
 const CategoriesContainer = ({categories}) => {
   return (
