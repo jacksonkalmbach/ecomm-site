@@ -1,3 +1,4 @@
+
 import CategoriesContainer from '../../components/categories-container/categories-container.component';
 import '../../categories.styles.scss'
 
@@ -33,7 +34,9 @@ function Home() {
   
 
   return (
-    <CategoriesContainer categories={categories}/>
+    <div>
+      <CategoriesContainer categories={categories}/>
+    </div>
   )
 }
 
