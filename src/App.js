@@ -1,4 +1,4 @@
-import './App.css';
+import './categories.styles.scss'
 
 function App() {
 
@@ -25,11 +25,11 @@ function App() {
     <div className="categories-container">
       {categories.map(category => (
         <div className='category-container'>
-        <div className='background-image' />
-        <div className='category-body-conatiner'>
-          <h2>{category.title}</h2>
-          <p>Shop Now</p>
-        </div>
+          <div className='background-image' />
+          <div className='category-body-container'>
+            <h2>{category.title}</h2>
+            <p>Shop Now</p>
+          </div>
       </div>
       ))}
     </div>
