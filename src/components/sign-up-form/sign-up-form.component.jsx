@@ -3,7 +3,7 @@ import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
-import './signUpForm.styles.scss';
+import './sign-up-form.styles.scss';
 
 import { 
   createAuthUserWithEmailAndPassword, 
@@ -37,7 +37,7 @@ const SignUpForm = () => {
     
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password);
-      const userDocRef = await createUserDocumentFromAuth(user, { displayName });
+      await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch(error) {
       if (error.code === 'auth/email-already-in-use') {
@@ -61,7 +61,7 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit}>
         <FormInput 
           label='Display Name'
-          inputOptions ={{
+          inputOptions={{
             type: 'text',
             required: true,
             onChange: handleChange,
@@ -72,7 +72,7 @@ const SignUpForm = () => {
         
         <FormInput
           label='Email' 
-          inputOptions ={{
+          inputOptions={{
             type: 'email',
             required: true,
             onChange: handleChange,
@@ -83,7 +83,7 @@ const SignUpForm = () => {
 
         <FormInput 
           label='Password'
-          inputOptions ={{
+          inputOptions={{
             type: 'password',
             required: true,
             onChange: handleChange,
@@ -94,7 +94,7 @@ const SignUpForm = () => {
 
         <FormInput
           label='Confirm Password'
-          inputOptions ={{
+          inputOptions={{
             type: 'password',
             required: true,
             onChange: handleChange,
