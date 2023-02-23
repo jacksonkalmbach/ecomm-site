@@ -3,7 +3,8 @@ import {
   getAuth, 
   signInWithRedirect, 
   signInWithPopup,
-  GoogleAuthProvider 
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword 
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -39,15 +40,14 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 export const db = getFirestore();
 
 // that the data from the authentication and store it inside of firestore
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
+  // return out of the function if not given userAuth
+  if (!userAuth) return;
+
   // first, check if there is an existing document reference
     // we are using the uid from the user authentication as the unique identifier in the db collection
   const userDocRef = doc(db, 'users', userAuth.uid);
-  console.log('userDocRef', userDocRef);
-
   const userSnapshot = await getDoc(userDocRef);
-  console.log('userSnaphot', userSnapshot);
-  console.log(userSnapshot.exists());
 
   // check if user data exists
   // if user data does not exist
@@ -60,7 +60,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName,
         email,
-        createdAt
+        createdAt, 
+        ...additionalInfo,
       });
     } catch(error) {
       console.log('error creating user', error.message);
@@ -68,4 +69,12 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
   // return userDocRef
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  // if we are not given an email or a password, then exit the function
+  if (!email || !password) return;
+
+  // otherwise, return the value from calling the method
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
