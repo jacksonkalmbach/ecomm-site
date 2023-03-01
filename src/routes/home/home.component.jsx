@@ -1,5 +1,5 @@
 
-import CategoriesContainer from '../../components/categories-container/categories-container.component';
+import Directory from '../../components/directory/directory.component';
 import '../../categories.styles.scss'
 
 function Home() {
@@ -35,7 +35,7 @@ function Home() {
 
   return (
     <div>
-      <CategoriesContainer categories={categories}/>
+      <Directory categories={categories}/>
     </div>
   )
 }
